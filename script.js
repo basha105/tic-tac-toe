@@ -18,6 +18,14 @@ const board = function Gameboard() {
         }
     }
 
+    const placeToken = (row, column, player) => {
+        let desiredCell = board[row][column];
+        if (desiredCell.getToken == "empty") {
+            desiredCell.addToken(player.token);
+        }
+
+    }
+
     return {
         printBoard
     };
@@ -65,7 +73,17 @@ function gameController(
     };
 
     const getActivePlayer = () => activePlayer;
-    
+
+    const printNewRound = () => {
+        board.printBoard();
+        console.log(`${getActivePlayer().name}'s turn.`);
+    }
+
+    const playRound = (row, column) => {
+        console.log(`Placing ${getActivePlayer.name}'s token ${getActivePlayer.token} into row ${row}, column ${column}`);
+
+    }
+
 
 
 }
