@@ -1,4 +1,4 @@
-let board = function Gameboard() {
+const board = function Gameboard() {
     const rows = 3;
     const columns = 3;
     const board = [];
@@ -9,6 +9,18 @@ let board = function Gameboard() {
             board[i].push(Cell());
         }
     }
+
+    const printBoard = () => {
+        for (let i=0; i<rows; i++) {
+            for (let j=0; j<columns; j++) {
+                console.log("Row: "+ String(i) + "Column: " + String(j) + "Value: " + String(board[i][j].getValue));
+            }
+        }
+    }
+
+    return {
+        printBoard
+    };
 }();
 
 function Cell() {
@@ -18,10 +30,42 @@ function Cell() {
         value = shape;
     };
 
-    const getValue = () => value;
+    const getToken = () => value;
 
     return {
         addToken,
-        getValue
+        getToken
     };
+}
+
+function gameController(
+    playerOneName = "Player One",
+    playerTwoName = "Player Two"
+) {
+    const players = [
+        {
+            name: playerOneName,
+            token: "X"
+        },
+        {
+            name: playerTwoName,
+            token: "O"
+        }
+    ];
+
+    let activePlayer = players[0];
+
+    const switchPlayerTurn = () => {
+        if (activePlayer == players[0]) {
+            activePlayer = players[1];
+        }
+        else {
+            activePlayer = players[0];
+        }
+    };
+
+    const getActivePlayer = () => activePlayer;
+    
+
+
 }
