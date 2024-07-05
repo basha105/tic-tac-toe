@@ -8,7 +8,7 @@ const board = function Gameboard() {
         for (let j=0; j<columns; j++) {
             board[i].push(Cell());
         }
-    }
+    }XMLDocument
 
     const printBoard = () => {
         for (let i=0; i<rows; i++) {
@@ -22,6 +22,10 @@ const board = function Gameboard() {
         let desiredCell = board[row][column];
         if (desiredCell.getToken == "empty") {
             desiredCell.addToken(player.token);
+        }
+
+        else {
+
         }
 
     }
