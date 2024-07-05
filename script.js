@@ -1,4 +1,4 @@
-const board = function Gameboard() {
+const board = function Gameboard() { // Defined gameboard here
     const rows = 3;
     const columns = 3;
     const board = [];
@@ -8,30 +8,31 @@ const board = function Gameboard() {
         for (let j=0; j<columns; j++) {
             board[i].push(Cell());
         }
-    }XMLDocument
+    }
 
     const printBoard = () => {
         for (let i=0; i<rows; i++) {
             for (let j=0; j<columns; j++) {
-                console.log("Row: "+ String(i) + "Column: " + String(j) + "Value: " + String(board[i][j].getValue));
+                console.log("Row: "+ String(i) + " Column: " + String(j) + " Value: " + String(board[i][j].getToken()));
             }
         }
     }
 
     const placeToken = (row, column, player) => {
         let desiredCell = board[row][column];
-        if (desiredCell.getToken == "empty") {
+        if (String(desiredCell.getToken()) == "empty") {
             desiredCell.addToken(player.token);
+            console.log("Token placed.");
         }
 
         else {
-
+            console.log("Cannot place token, slot is taken.");
         }
 
     }
 
     return {
-        printBoard
+        printBoard, placeToken
     };
 }();
 
@@ -50,7 +51,7 @@ function Cell() {
     };
 }
 
-function gameController(
+const gameController = function gameController( // Defined gamecontroller here
     playerOneName = "Player One",
     playerTwoName = "Player Two"
 ) {
@@ -84,10 +85,38 @@ function gameController(
     }
 
     const playRound = (row, column) => {
-        console.log(`Placing ${getActivePlayer.name}'s token ${getActivePlayer.token} into row ${row}, column ${column}`);
+        console.log(`Placing ${getActivePlayer().name}'s token ${getActivePlayer().token} into row ${row}, column ${column}`);
+        board.placeToken(row, column, getActivePlayer());
+        switchPlayerTurn();
 
     }
 
+    return {
+        getActivePlayer,
+        switchPlayerTurn,
+        printNewRound,
+        playRound
+    }
+}();
+
+gameController.printNewRound();
+gameController.playRound(0, 0);
+
+gameController.printNewRound();
+gameController.playRound(0, 1);
+
+gameController.printNewRound();
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
