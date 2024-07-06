@@ -32,19 +32,25 @@ const board = function Gameboard() { // Defined gameboard here
     }
 
     const endGame = () => {
-        let foundRow = false;
-        function checkX(value) {
-            return value == "X";
+        function checkX(cell) {
+            return cell.getToken() == "X";
         }
-        function checkO(value) {
-            return value == "O";
+        function checkO(cell) {
+            return cell.getToken() == "O";
         }
 
         for (let i=0; i<rows; i++) {
             let currentRow = board[i];
             let xRow = currentRow.filter(checkX);
             let oRow = currentRow.filter(checkO);
+
+            if (xRow.length == 3 || oRow.length == 3) {
+                console.log("3 in a row found!");
+                break;
+            }
         }
+
+        
 
     }
 
