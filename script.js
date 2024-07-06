@@ -31,8 +31,25 @@ const board = function Gameboard() { // Defined gameboard here
 
     }
 
+    const endGame = () => {
+        let foundRow = false;
+        function checkX(value) {
+            return value == "X";
+        }
+        function checkO(value) {
+            return value == "O";
+        }
+
+        for (let i=0; i<rows; i++) {
+            let currentRow = board[i];
+            let xRow = currentRow.filter(checkX);
+            let oRow = currentRow.filter(checkO);
+        }
+
+    }
+
     return {
-        printBoard, placeToken
+        printBoard, placeToken, endGame
     };
 }();
 
@@ -103,9 +120,25 @@ gameController.printNewRound();
 gameController.playRound(0, 0);
 
 gameController.printNewRound();
+gameController.playRound(1, 0);
+
+gameController.printNewRound();
 gameController.playRound(0, 1);
 
 gameController.printNewRound();
+gameController.playRound(1, 2);
+
+gameController.printNewRound();
+gameController.playRound(0, 2)
+
+gameController.printNewRound();
+
+board.endGame();
+
+
+
+
+
 
 
 
