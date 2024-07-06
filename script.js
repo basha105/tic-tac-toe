@@ -39,7 +39,7 @@ const board = function Gameboard() { // Defined gameboard here
             return cell.getToken() == "O";
         }
 
-        for (let i=0; i<rows; i++) {
+        for (let i=0; i<rows; i++) {  // Check for 3 in a row
             let currentRow = board[i];
             let xRow = currentRow.filter(checkX);
             let oRow = currentRow.filter(checkO);
@@ -50,7 +50,36 @@ const board = function Gameboard() { // Defined gameboard here
             }
         }
 
-        
+        let column0 = [];
+        let column1 = [];
+        let column2 = [];
+
+        let columnArray = [column0, column1, column2];
+
+        for (let i=0; i<rows; i++) {
+            for (let j=0; j<columns; j++) {
+                if (j == 0) {
+                    column0.push(board[i][j].getToken());
+                }
+                if (j == 1) {
+                    column1.push(board[i][j].getToken());
+                }
+                if (j == 2) {
+                    column2.push(board[i][j].getToken());
+                }
+            }
+        }
+
+        for (let i=0; i<columnArray.length; i++) {
+            let currentColumn = columnArray[i];
+            let xColumn = currentColumn.filter(checkX);
+            let oColumn = currentColumn.filter(checkO);
+
+            if (xColumn.length == 3 || oColumn.length == 3) {
+                console.log("3 in a column found!");
+                break;
+            }
+        }
 
     }
 
