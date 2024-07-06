@@ -55,29 +55,22 @@ const board = function Gameboard() { // Defined gameboard here
         let column2 = [];
 
         let columnArray = [column0, column1, column2];
+        let currentCell;
 
         for (let i=0; i<rows; i++) {
             for (let j=0; j<columns; j++) {
                 if (j == 0) {
-                    column0.push(board[i][j].getToken());
+                    currentCell = board[i][j];
+                    column0.push(currentCell.getToken());
                 }
-                if (j == 1) {
-                    column1.push(board[i][j].getToken());
+                else if (j == 1) {
+                    currentCell = board[i][j];
+                    column1.push(currentCell.getToken());
                 }
-                if (j == 2) {
-                    column2.push(board[i][j].getToken());
+                else if (j == 2) {
+                    currentCell = board[i][j];
+                    
                 }
-            }
-        }
-
-        for (let i=0; i<columnArray.length; i++) {
-            let currentColumn = columnArray[i];
-            let xColumn = currentColumn.filter(checkX);
-            let oColumn = currentColumn.filter(checkO);
-
-            if (xColumn.length == 3 || oColumn.length == 3) {
-                console.log("3 in a column found!");
-                break;
             }
         }
 
