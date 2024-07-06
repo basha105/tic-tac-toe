@@ -61,19 +61,29 @@ const board = function Gameboard() { // Defined gameboard here
             for (let j=0; j<columns; j++) {
                 if (j == 0) {
                     currentCell = board[i][j];
-                    column0.push(currentCell.getToken());
+                    column0.push(currentCell);
                 }
                 else if (j == 1) {
                     currentCell = board[i][j];
-                    column1.push(currentCell.getToken());
+                    column1.push(currentCell);
                 }
                 else if (j == 2) {
                     currentCell = board[i][j];
-                    
+                    column2.push(currentCell);
                 }
             }
         }
 
+        for (let i=0; i<columnArray.length; i++) {
+            let currentColumn = columnArray[i];
+            let xColumn = currentColumn.filter(checkX);
+            let oColumn = currentColumn.filter(checkO);
+
+            if (xColumn.length == 3 || oColumn.length == 3) {
+                console.log("3 in a column found!");
+                break;
+            }
+        }
     }
 
     return {
@@ -148,16 +158,16 @@ gameController.printNewRound();
 gameController.playRound(0, 0);
 
 gameController.printNewRound();
-gameController.playRound(1, 0);
+gameController.playRound(2, 1);
 
 gameController.printNewRound();
-gameController.playRound(0, 1);
+gameController.playRound(1, 0);
 
 gameController.printNewRound();
 gameController.playRound(1, 2);
 
 gameController.printNewRound();
-gameController.playRound(0, 2)
+gameController.playRound(2, 0)
 
 gameController.printNewRound();
 
