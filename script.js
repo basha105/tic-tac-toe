@@ -46,7 +46,7 @@ const board = function Gameboard() { // Defined gameboard here
 
             if (xRow.length == 3 || oRow.length == 3) {
                 console.log("3 in a row found!");
-                break;
+                return true;
             }
         }
 
@@ -81,9 +81,10 @@ const board = function Gameboard() { // Defined gameboard here
 
             if (xColumn.length == 3 || oColumn.length == 3) {
                 console.log("3 in a column found!");
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     return {
@@ -142,7 +143,6 @@ const gameController = function gameController( // Defined gamecontroller here
     const playRound = (row, column) => {
         console.log(`Placing ${getActivePlayer().name}'s token ${getActivePlayer().token} into row ${row}, column ${column}`);
         board.placeToken(row, column, getActivePlayer());
-        switchPlayerTurn();
     }
 
     return {
@@ -187,54 +187,32 @@ const screenController = function screenController() {
         newSquare.addEventListener("click", () => {
             if (isClicked == false) {
                 
-                gameController.playRound(currentRow, currentColumn);
                 if (gameController.getActivePlayer().token == "X") {
                     newSquare.appendChild(xImg);
                 }
                 else if (gameController.getActivePlayer().token == "O") {
                     newSquare.appendChild(oImg);
                 }
-                
+
+                gameController.playRound(currentRow, currentColumn);
+
+                if (board.endGame() == true) {
+                    alert(`Game over! ${gameController.getActivePlayer().name} won!`);
+                }
+                else {
+                    gameController.switchPlayerTurn();
+                }
                 isClicked = true;
             }
             
-        })
-        
-        
+        })     
         boardDisplay.appendChild(newSquare);
     }
-    
-
-
     container.appendChild(boardDisplay);
-
-
-
-
-
-
-
-    
 }();
 
-gameController.printNewRound();
-gameController.playRound(0, 0);
 
-gameController.printNewRound();
-gameController.playRound(2, 1);
 
-gameController.printNewRound();
-gameController.playRound(1, 0);
-
-gameController.printNewRound();
-gameController.playRound(1, 2);
-
-gameController.printNewRound();
-gameController.playRound(2, 0)
-
-gameController.printNewRound();
-
-board.endGame();
 
 
 
