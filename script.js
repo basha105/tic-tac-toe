@@ -143,7 +143,6 @@ const gameController = function gameController( // Defined gamecontroller here
         console.log(`Placing ${getActivePlayer().name}'s token ${getActivePlayer().token} into row ${row}, column ${column}`);
         board.placeToken(row, column, getActivePlayer());
         switchPlayerTurn();
-
     }
 
     return {
@@ -152,6 +151,30 @@ const gameController = function gameController( // Defined gamecontroller here
         printNewRound,
         playRound
     }
+}();
+
+const screenController = function screenController() {
+    const container = document.getElementById("container");
+    const boardDisplay = document.createElement("div");
+    boardDisplay.id = "boardDisplay";
+
+    for (let i=0; i<9; i++) {
+        let newSquare = document.createElement("div");
+        newSquare.classList.add("square");
+        boardDisplay.appendChild(newSquare);
+    }
+    
+
+
+    container.appendChild(boardDisplay);
+
+
+
+
+
+
+
+    
 }();
 
 gameController.printNewRound();
