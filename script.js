@@ -176,9 +176,24 @@ const screenController = function screenController() {
         let currentColumn = i % 3;
         let isClicked = false;
 
+        let xImg = document.createElement('img');
+        xImg.src = 'letterX.png';
+        xImg.classList.add("images");
+
+        let oImg = document.createElement('img');
+        oImg.src = 'letterO.jpeg';
+        oImg.classList.add("images");
+
         newSquare.addEventListener("click", () => {
             if (isClicked == false) {
+                
                 gameController.playRound(currentRow, currentColumn);
+                if (gameController.getActivePlayer().token == "X") {
+                    newSquare.appendChild(xImg);
+                }
+                else if (gameController.getActivePlayer().token == "O") {
+                    newSquare.appendChild(oImg);
+                }
                 
                 isClicked = true;
             }
