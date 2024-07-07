@@ -158,9 +158,34 @@ const screenController = function screenController() {
     const boardDisplay = document.createElement("div");
     boardDisplay.id = "boardDisplay";
 
+
     for (let i=0; i<9; i++) {
         let newSquare = document.createElement("div");
         newSquare.classList.add("square");
+        
+        let currentRow;
+        if (i<3) {
+            currentRow = 0;
+        }
+        else if (i<6) {
+            currentRow = 1;
+        }
+        else if (i<9) {
+            currentRow = 2;
+        }
+        let currentColumn = i % 3;
+        let isClicked = false;
+
+        newSquare.addEventListener("click", () => {
+            if (isClicked == false) {
+                gameController.playRound(currentRow, currentColumn);
+                
+                isClicked = true;
+            }
+            
+        })
+        
+        
         boardDisplay.appendChild(newSquare);
     }
     
